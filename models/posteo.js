@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Posteo.hasMany(models.Comentario);
+      Posteo.hasMany(models.Like);
+      Posteo.belongsTo(models.User);
+      Posteo.belongsTo(models.Img);
       // define association here
     }
   }
