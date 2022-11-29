@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Like.belongsTo(models.Posteo);
+      Like.belongsTo(models.User);
     }
   }
   Like.init(

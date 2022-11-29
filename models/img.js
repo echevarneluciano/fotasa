@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Img.hasMany(models.Posteo);
+      Img.belongsTo(models.User);
     }
   }
   Img.init(
