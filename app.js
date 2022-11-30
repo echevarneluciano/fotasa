@@ -3,11 +3,32 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var session = require("express-session");
+const { auth, requiresAuth } = require("express-openid-connect");
+
+var app = express();
+
+const sessionMiddleware = app.use(
+  session({
+    secret: "keyboard cat",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  baseURL: "http://localhost:3000",
+  clientID: "uI9MzRMne1EEiyqm1HPFqDvWvykJnbbz",
+  issuerBaseURL: "https://dev-5xespcu4ztxudvil.us.auth0.com",
+  secret: "LONG_RANDOM_STRING",
+};
+
+app.use(auth(config));
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-
-var app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
