@@ -4,6 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var session = require("express-session");
+const { User } = require("./models");
 const { auth, requiresAuth } = require("express-openid-connect");
 
 var app = express();
@@ -25,10 +26,22 @@ const config = {
   secret: "LONG_RANDOM_STRING",
 };
 
-app.use(auth(config));
+app.use(auth(config), async function (req, res, next) {
+  if (req.oidc.user) {
+    await User.findOrCreate({
+      where: { nick: req.oidc.user.nickname, mail: req.oidc.user.email },
+    }),
+      next();
+  } else console.log("no logeado"), next();
+});
+
+app.get("/profile", requiresAuth(), (req, res) => {
+  res.send(JSON.stringify(req.oidc.user));
+});
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var muroRouter = require("./routes/muro");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -42,6 +55,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/muro", muroRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

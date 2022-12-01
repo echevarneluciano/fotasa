@@ -1,0 +1,20 @@
+extends layout
+
+block scripts 
+ script(src="/javascripts/murojs.js")
+
+block content
+  a(href="/") Volver 
+  h1= title
+  form(action="muro/upload", method="post",enctype="multipart/form-data")
+   label(for="imagen") Subir una imagen?
+   |
+   |
+   input#imagen(type="file", name="imagen")
+   input(type="submit", value="enviar") 
+   br
+   div#preview
+   h2 Muro
+   .container
+    
+  
