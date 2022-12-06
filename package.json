@@ -12,6 +12,8 @@
     "express-openid-connect": "^2.10.0",
     "express-session": "^1.17.3",
     "http-errors": "~1.6.3",
+    "image-size": "^1.0.2",
+    "jimp-watermark": "^1.1.0",
     "morgan": "~1.9.1",
     "multer": "^1.4.5-lts.1",
     "mysql2": "^2.3.3",

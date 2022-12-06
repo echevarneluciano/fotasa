@@ -28,10 +28,11 @@ const config = {
 
 app.use(auth(config), async function (req, res, next) {
   if (req.oidc.user) {
-    await User.findOrCreate({
+    let usuario = await User.findOrCreate({
       where: { nick: req.oidc.user.nickname, mail: req.oidc.user.email },
-    }),
-      next();
+    });
+    req.session.idusuario = usuario[0].id;
+    next();
   } else console.log("no logeado"), next();
 });
 
@@ -54,8 +55,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/muro", muroRouter);
+app.use("/users", requiresAuth(), usersRouter);
+app.use("/muro", requiresAuth(), muroRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
