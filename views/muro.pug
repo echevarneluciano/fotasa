@@ -110,6 +110,12 @@ block content
          p.card-text
           |Tags:
          p.card-text= post.etiquetas
+         form(action="muro/comentar", method="post")
+          label(for="comentario") Comentar: 
+          input#comentario(type="text", name="comentario")
+          input(type="hidden", name="postid", id=post.id, value=post.id)
+          br
+          input(type="submit", value="Enviar")   
          a.btn.mr-2(href='/compraventa')
           i.fas.fa-link
           |  Compra/venta  

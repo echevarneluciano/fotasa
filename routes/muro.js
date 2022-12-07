@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var { Img, Posteo, User, Like } = require("../models");
+var { Img, Posteo, User, Like, Comentario } = require("../models");
 const sizeOf = require("image-size");
 const multer = require("multer");
 const SharpMulter = require("sharp-multer");
@@ -119,6 +119,16 @@ router.post("/like", async function (req, res) {
   if (!busca) {
     await Like.create(likeBD);
   }
+});
+
+router.post("/comentar", async function (req, res) {
+  let comentarBD = {
+    descripcion: req.body.comentario,
+    userid: req.session.idusuario,
+    posteoid: req.body.postid,
+  };
+  await Comentario.create(comentarBD);
+  res.redirect("/muro");
 });
 
 module.exports = router;
