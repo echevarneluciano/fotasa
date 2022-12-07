@@ -94,52 +94,26 @@ block content
    br
    br
   h2 Muro
-  .container.mx-auto.mt-4
+  .container.mx-auto.mt-2
    .row
     each post in posts    
-      .col-md-4
-       .card(style='width: 18rem;')
-        img.card-img-top(src=post.Img.url)
-        .card-body
-         h5.card-title=post.titulo
-         p.card-text 
-          |Dueño: 
-         p.card-text= `Nick: ${post.User.nick}` 
-         p.card-text= `Mail: ${post.User.mail}` 
-         p.card-text= `Categoria: ${post.categoria}`
-         p.card-text
-          |Tags:
-         p.card-text= post.etiquetas
-         a.btn.mr-2(href='/compraventa')
-          i.fas.fa-link
-          |  Compra/venta  
-         br
-         form.rating
-          label
-            input(type='radio' name='stars' value="1"  id=post.id)
-            span.icon &starf;
-          label
-            input(type='radio' name='stars' value="2" id=post.id)
-            span.icon &starf;
-            span.icon &starf;
-          label
-            input(type='radio' name='stars' value="3"  id=post.id)
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
-          label
-            input(type='radio' name='stars' value="4"  id=post.id)
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
-          label
-            input(type='radio' name='stars' value="5"  id=post.id)
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
-          
+      .card(style='width: 18rem;')
+       img.card-img-top(src='...' alt='...')
+       .card-body
+        h5.card-title Card title
+        p.card-text
+         | Some quick example text to build on the card title and make up the bulk of the card&apos;s content.
+        a.btn.btn-primary(href='#') Go somewhere
+        p.clasificacion
+         input#radio1(type='radio' name='estrellas' value='5')
+         label(for='radio1') &starf;
+         input#radio2(type='radio' name='estrellas' value='4')
+         label(for='radio2') &starf;
+         input#radio3(type='radio' name='estrellas' value='3')
+         label(for='radio3') &starf;
+         input#radio4(type='radio' name='estrellas' value='2')
+         label(for='radio4') &starf;
+         input#radio5(type='radio' name='estrellas' value='1')
+         label(for='radio5') &starf;
     
   

@@ -35,3 +35,19 @@ seleccionArchivosP.addEventListener("change", () => {
 cancelarP.addEventListener("click", () => {
   imagenPrevisualizacionP.src = "";
 });
+
+$(":radio").change(function () {
+  let ob = { estrellas: this.value, posteoid: this.id };
+  $.ajax({
+    url: "/muro/like",
+    data: ob,
+    method: "post",
+    dataType: "json",
+    success: function (response) {
+      console.log(response);
+    },
+    error: function (error) {
+      console.log(error);
+    },
+  });
+});

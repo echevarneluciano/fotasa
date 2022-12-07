@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var { Img, Posteo, User } = require("../models");
+var { Img, Posteo, User, Like } = require("../models");
 const sizeOf = require("image-size");
 const multer = require("multer");
 const SharpMulter = require("sharp-multer");
@@ -23,7 +23,11 @@ router.get("/", async function (req, res) {
   let imagenes = await Img.findAll({
     where: { userid: req.session.idusuario, tipo: "Sin publicar" },
   });
-  res.render("muro", { title: "Fotasa App", posts: posts, imagenes: imagenes });
+  res.render("muro", {
+    title: "Fotasa App",
+    posts: posts,
+    imagenes: imagenes,
+  });
 });
 
 router.post("/upload", upload.single("imagen"), async (req, res) => {
@@ -102,5 +106,19 @@ router.post(
     res.redirect("/muro");
   }
 );
+
+router.post("/like", async function (req, res) {
+  let likeBD = {
+    estrellas: parseInt(req.body.estrellas),
+    posteoid: parseInt(req.body.posteoid),
+    userid: req.session.idusuario,
+  };
+  let busca = await Like.findOne({
+    where: { userid: likeBD.userid, posteoid: likeBD.posteoid },
+  });
+  if (!busca) {
+    await Like.create(likeBD);
+  }
+});
 
 module.exports = router;
