@@ -18,7 +18,7 @@ const upload = multer({ storage });
 
 router.get("/", async function (req, res) {
   let posts = await Posteo.findAll({
-    include: [{ model: Img }, { model: User }],
+    include: [{ model: Img }, { model: User }, { model: Comentario }],
   });
   let imagenes = await Img.findAll({
     where: { userid: req.session.idusuario, tipo: "Sin publicar" },
@@ -27,6 +27,7 @@ router.get("/", async function (req, res) {
     title: "Fotasa App",
     posts: posts,
     imagenes: imagenes,
+    nick: req.session.nickusuario,
   });
 });
 
@@ -121,14 +122,23 @@ router.post("/like", async function (req, res) {
   }
 });
 
-router.post("/comentar", async function (req, res) {
+router.post("/", async function (req, res) {
   let comentarBD = {
-    descripcion: req.body.comentario,
+    descripcion: `${req.session.nickusuario}: ${req.body.comentario}`,
     userid: req.session.idusuario,
     posteoid: req.body.postid,
   };
-  await Comentario.create(comentarBD);
-  res.redirect("/muro");
+  let comentario = await Comentario.create(comentarBD);
+  res.json(comentario);
+});
+
+router.get("/perfil", async function (req, res) {
+  let usuario = await User.findByPk(req.session.idusuario);
+  res.render("perfil", {
+    title: `Perfil de ${req.session.nickusuario}`,
+    usuario: usuario,
+    nick: req.session.nickusuario,
+  });
 });
 
 module.exports = router;

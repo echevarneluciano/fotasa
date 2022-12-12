@@ -51,3 +51,20 @@ $(":radio").change(function () {
     },
   });
 });
+
+$(".comentarioform").submit(function () {
+  $.ajax({
+    type: "POST",
+    data: $(this).serialize(),
+    url: "/muro",
+    success: function (data) {
+      console.log(data);
+      let comentarioid = document.querySelector(`#comentarios${data.posteoid}`);
+      let p = document.createElement("p");
+      let comentariotexto = document.createTextNode(data.descripcion);
+      p.appendChild(comentariotexto);
+      comentarioid.appendChild(p);
+    },
+  });
+  return false;
+});

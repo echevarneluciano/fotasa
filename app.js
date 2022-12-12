@@ -32,6 +32,7 @@ app.use(auth(config), async function (req, res, next) {
       where: { nick: req.oidc.user.nickname, mail: req.oidc.user.email },
     });
     req.session.idusuario = usuario[0].id;
+    req.session.nickusuario = usuario[0].nick;
     next();
   } else console.log("no logeado"), next();
 });

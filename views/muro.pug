@@ -1,9 +1,11 @@
 extends layout
 
 block scripts 
- script(src="/javascripts/murojs.js")
+ script(src="/javascripts/murojs.js" defer)
 block content
-  a(href="/logout") Logout
+  a(href="/logout") Logout #{nick}
+  br
+  a(href="muro/perfil") #{nick}: Datos de perfil
   br
   a(href="/") Volver 
   h1= title
@@ -110,12 +112,16 @@ block content
          p.card-text
           |Tags:
          p.card-text= post.etiquetas
-         form(action="muro/comentar", method="post")
+         form(action="muro", method="post",class="comentarioform")
           label(for="comentario") Comentar: 
           input#comentario(type="text", name="comentario")
           input(type="hidden", name="postid", id=post.id, value=post.id)
           br
-          input(type="submit", value="Enviar")   
+          input(type="submit", value="Enviar") 
+         div(id=`comentarios${post.id}`)  
+         .comentarios
+          each comentario in post.Comentarios 
+           p=comentario.descripcion
          a.btn.mr-2(href='/compraventa')
           i.fas.fa-link
           |  Compra/venta  

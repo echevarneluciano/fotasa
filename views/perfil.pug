@@ -1,0 +1,9 @@
+extends layout
+
+block scripts 
+ script(src="/javascripts/murojs.js" defer)
+block content
+  a(href="/logout") Logout #{nick}
+  br
+  a(href="/muro") Volver 
+  h1= title
