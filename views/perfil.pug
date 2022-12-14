@@ -1,9 +1,27 @@
 extends layout
 
-block scripts 
- script(src="/javascripts/murojs.js" defer)
 block content
   a(href="/logout") Logout #{nick}
   br
   a(href="/muro") Volver 
   h1= title
+  form(action="/muro/perfil", method="post")
+   input(type="hidden", name="id",value=usuario.id) 
+   label(for="nick") Nick: 
+   input(type="text", name="nick", value=usuario.nick, readonly, disabled)
+   |
+   | 
+   label(for="nombre") Nombre: 
+   input(type="text", name="nombre", value=usuario.nombre)
+   br
+   br
+   label(for="mail") Mail:
+   input(type="text", name="mail", value=usuario.mail, readonly,disabled,size="30")
+   br
+   br
+   label(for="intereses") Intereses: 
+   textarea(name="intereses", cols="30", rows="2")    
+    | #{usuario.intereses}
+   br
+   br
+   input(type="submit", value="Actualizar")

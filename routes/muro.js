@@ -4,6 +4,7 @@ var { Img, Posteo, User, Like, Comentario } = require("../models");
 const sizeOf = require("image-size");
 const multer = require("multer");
 const SharpMulter = require("sharp-multer");
+const { Op } = require("sequelize");
 var watermark = require("jimp-watermark");
 
 const storage = SharpMulter({
@@ -137,6 +138,36 @@ router.get("/perfil", async function (req, res) {
   res.render("perfil", {
     title: `Perfil de ${req.session.nickusuario}`,
     usuario: usuario,
+    nick: req.session.nickusuario,
+  });
+});
+
+router.post("/perfil", async function (req, res) {
+  let usuario = await User.update(
+    {
+      nombre: req.body.nombre,
+      intereses: req.body.intereses,
+    },
+    { where: { id: req.body.id } }
+  );
+  res.redirect("/muro/perfil");
+});
+
+router.post("/buscar", async function (req, res) {
+  var options = {
+    where: {
+      [Op.or]: [
+        { titulo: { [Op.like]: "%" + req.body.palabraclave + "%" } },
+        { etiquetas: { [Op.like]: "%" + req.body.palabraclave + "%" } },
+      ],
+    },
+    include: [{ model: Img }, { model: User }, { model: Comentario }],
+  };
+
+  let buscador = await Posteo.findAll(options);
+  res.render("buscados", {
+    title: "Fotasa App",
+    posts: buscador,
     nick: req.session.nickusuario,
   });
 });

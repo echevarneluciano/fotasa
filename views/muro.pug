@@ -95,6 +95,15 @@ block content
    img#preview(width="200px")
    br
    br
+  h5 Buscador 
+  form(action="muro/buscar", method="post")
+   label(for="palabraclave") Palabra clave: 
+   |
+   |
+   input(type="text", name="palabraclave", required)
+   |
+   |
+   input(type="submit", value="Buscar")
   h2 Muro
   .container.mx-auto.mt-4
    .row
