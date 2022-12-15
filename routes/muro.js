@@ -5,6 +5,7 @@ const sizeOf = require("image-size");
 const multer = require("multer");
 const SharpMulter = require("sharp-multer");
 const { Op } = require("sequelize");
+const sequelize = require("sequelize");
 var watermark = require("jimp-watermark");
 
 const storage = SharpMulter({
@@ -24,6 +25,33 @@ router.get("/", async function (req, res) {
   let imagenes = await Img.findAll({
     where: { userid: req.session.idusuario, tipo: "Sin publicar" },
   });
+
+  let promedio = await Posteo.findAll({
+    attributes: ["id"],
+    raw: true,
+    include: [
+      {
+        model: Like,
+        attributes: [
+          [sequelize.fn("avg", sequelize.col("estrellas")), "promedio"],
+        ],
+        required: true,
+      },
+    ],
+    group: ["posteo.id"],
+  });
+
+  posts.map((p) => {
+    p.dataValues.promedio = "datos insuficientes";
+    promedio.map((pro) => {
+      if (p.id == pro.id) {
+        p.dataValues.promedio = pro["Likes.promedio"];
+      }
+    });
+  });
+
+  console.log(JSON.stringify(posts));
+
   res.render("muro", {
     title: "Fotasa App",
     posts: posts,
