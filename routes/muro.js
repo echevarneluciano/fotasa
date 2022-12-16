@@ -50,12 +50,21 @@ router.get("/", async function (req, res) {
     });
   });
 
-  console.log(JSON.stringify(posts));
-
   res.render("muro", {
     title: "Fotasa App",
     posts: posts,
     imagenes: imagenes,
+    nick: req.session.nickusuario,
+  });
+});
+
+router.get("/detalles/:id", async function (req, res) {
+  let post = await Posteo.findByPk(req.params.id, {
+    include: [{ model: Img }, { model: User }, { model: Comentario }],
+  });
+  res.render("detalles", {
+    title: "Fotasa App",
+    post: post,
     nick: req.session.nickusuario,
   });
 });
@@ -137,20 +146,6 @@ router.post(
   }
 );
 
-router.post("/like", async function (req, res) {
-  let likeBD = {
-    estrellas: parseInt(req.body.estrellas),
-    posteoid: parseInt(req.body.posteoid),
-    userid: req.session.idusuario,
-  };
-  let busca = await Like.findOne({
-    where: { userid: likeBD.userid, posteoid: likeBD.posteoid },
-  });
-  if (!busca) {
-    await Like.create(likeBD);
-  }
-});
-
 router.post("/", async function (req, res) {
   let comentarBD = {
     descripcion: `${req.session.nickusuario}: ${req.body.comentario}`,
@@ -159,26 +154,6 @@ router.post("/", async function (req, res) {
   };
   let comentario = await Comentario.create(comentarBD);
   res.json(comentario);
-});
-
-router.get("/perfil", async function (req, res) {
-  let usuario = await User.findByPk(req.session.idusuario);
-  res.render("perfil", {
-    title: `Perfil de ${req.session.nickusuario}`,
-    usuario: usuario,
-    nick: req.session.nickusuario,
-  });
-});
-
-router.post("/perfil", async function (req, res) {
-  let usuario = await User.update(
-    {
-      nombre: req.body.nombre,
-      intereses: req.body.intereses,
-    },
-    { where: { id: req.body.id } }
-  );
-  res.redirect("/muro/perfil");
 });
 
 router.post("/buscar", async function (req, res) {

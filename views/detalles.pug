@@ -1,0 +1,23 @@
+extends layout
+block scripts 
+ script(src="/javascripts/murojs.js" defer)
+block content
+  a(href="/logout") Logout #{nick}
+  br
+  a(href="/muro") Volver 
+  h1= title
+  .container.mx-auto.mt-4
+   .row  
+    .col-md-4
+     .card(style='width: 18rem;')
+      img.card-img-top(src=post.Img.url)
+      .card-body
+       h5.card-title=post.titulo
+       p.card-text
+        |Tags:
+       p.card-text=post.etiquetas
+       p.card-text 
+          |Dueño: 
+       p.card-text= `Nick: ${post.User.nick}` 
+       p.card-text= `Mail: ${post.User.mail}` 
+       p.card-text= `Categoria: ${post.categoria}`

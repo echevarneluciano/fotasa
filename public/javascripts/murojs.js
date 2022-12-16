@@ -1,3 +1,7 @@
+$("Select").select2({
+  theme: "classic",
+});
+
 const seleccionArchivos = document.querySelector("#imagen"),
   imagenPrevisualizacion = document.querySelector("#preview"),
   cancelar = document.querySelector("#cancelar");
@@ -39,7 +43,7 @@ cancelarP.addEventListener("click", () => {
 $(":radio").change(function () {
   let ob = { estrellas: this.value, posteoid: this.id };
   $.ajax({
-    url: "/muro/like",
+    url: "/like",
     data: ob,
     method: "post",
     dataType: "json",
