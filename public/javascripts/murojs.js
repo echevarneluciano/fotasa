@@ -60,7 +60,7 @@ $(".comentarioform").submit(function () {
   $.ajax({
     type: "POST",
     data: $(this).serialize(),
-    url: "/muro",
+    url: "/comment",
     success: function (data) {
       console.log(data);
       let comentarioid = document.querySelector(`#comentarios${data.posteoid}`);

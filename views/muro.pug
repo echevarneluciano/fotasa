@@ -96,7 +96,7 @@ block content
    br
    br
   h5 Buscador 
-  form(action="muro/buscar", method="post")
+  form(action="/buscar", method="post")
    label(for="palabraclave") Palabra clave: 
    |
    |
@@ -116,7 +116,7 @@ block content
          p.card-text
           |Tags:
          p.card-text= post.etiquetas
-         form(action="muro", method="post",class="comentarioform")
+         form(action="/comment", method="post",class="comentarioform")
           label(for="comentario") Comentar: 
           input#comentario(type="text", name="comentario")
           input(type="hidden", name="postid", id=post.id, value=post.id)

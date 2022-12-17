@@ -45,6 +45,9 @@ var indexRouter = require("./routes/index");
 var userRouter = require("./routes/user");
 var muroRouter = require("./routes/muro");
 var likeRouter = require("./routes/like");
+var buscarRouter = require("./routes/search");
+var commentRouter = require("./routes/comment");
+var publicRouter = require("./routes/public");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -60,6 +63,9 @@ app.use("/", indexRouter);
 app.use("/user", requiresAuth(), userRouter);
 app.use("/muro", requiresAuth(), muroRouter);
 app.use("/like", requiresAuth(), likeRouter);
+app.use("/buscar", requiresAuth(), buscarRouter);
+app.use("/comment", requiresAuth(), commentRouter);
+app.use("/public", publicRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
