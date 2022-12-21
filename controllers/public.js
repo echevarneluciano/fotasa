@@ -1,4 +1,5 @@
 var { Img, Posteo, User, Like, Comentario } = require("../models");
+const { Op } = require("sequelize");
 const sequelize = require("sequelize");
 
 exports.muro = exports.muro = async function (req, res) {
@@ -33,5 +34,24 @@ exports.muro = exports.muro = async function (req, res) {
   res.render("publicMuro", {
     title: "Fotasa App",
     posts: posts,
+  });
+};
+
+exports.buscar = async function (req, res) {
+  var options = {
+    where: {
+      [Op.or]: [
+        { titulo: { [Op.like]: "%" + req.body.palabraclave + "%" } },
+        { etiquetas: { [Op.like]: "%" + req.body.palabraclave + "%" } },
+      ],
+      [Op.and]: [{ tipo: "Publico" }],
+    },
+    include: [{ model: Img }, { model: User }, { model: Comentario }],
+  };
+
+  let buscador = await Posteo.findAll(options);
+  res.render("buscadosPublic", {
+    title: "Fotasa App",
+    posts: buscador,
   });
 };

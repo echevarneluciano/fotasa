@@ -1,19 +1,11 @@
 extends layout
+
 block scripts 
  script(src="/javascripts/murojs.js" defer)
 block content
-  a(href="/") Volver 
+  a(href="/public") Volver 
   h1= title
-  h5 Buscador 
-  form(action="/public/buscar", method="post")
-   label(for="palabraclave") Palabra clave: 
-   |
-   |
-   input(type="text", name="palabraclave", required)
-   |
-   |
-   input(type="submit", value="Buscar")
-  h2 Muro publico
+  h2 Buscador
   .container.mx-auto.mt-4
    .row
     each post in posts    
@@ -27,3 +19,6 @@ block content
         p.card-text= post.etiquetas
         br
         p.card-text=`Promedio: ${post.dataValues.promedio}`
+          
+    
+  
