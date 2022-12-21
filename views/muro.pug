@@ -63,10 +63,10 @@ block content
     option(value="Paisaje") Paisaje  
    |
    |
-   label(for="Tipo") Tipo:
+   label(for="tipo") Tipo:
    |
    | 
-   Select(name="Tipo")
+   Select(name="tipo")
     option(value="Publico") Publico
     option(value="Privado") Privado
    br
@@ -109,8 +109,8 @@ block content
    .row
     each post in posts    
       .col-md-4
-       .card(style='width: 14rem;')
-        img.card-img-top(src=post.Img.url)
+       .card(style='width: 13rem;')
+        img.card-img-top(src=post.Img.url,style='width: 207px;')
         .card-body
          h5.card-title=post.titulo
          p.card-text
