@@ -1,6 +1,8 @@
 var { Img, Posteo, User, Like, Comentario } = require("../models");
 const sizeOf = require("image-size");
 const sequelize = require("sequelize");
+const { Op } = require("sequelize");
+const moment = require("moment");
 var watermark = require("jimp-watermark");
 
 exports.muro = async function (req, res) {
@@ -34,6 +36,33 @@ exports.muro = async function (req, res) {
       }
     });
   });
+  ///////////////////////////////
+  let postsDesta = await Posteo.findAll({
+    include: [
+      { model: Img },
+      { model: User },
+      { model: Comentario },
+      { model: Like },
+    ],
+    where: {
+      createdAt: {
+        [Op.between]: [
+          moment().subtract(7, "days").format(),
+          moment().format(),
+        ],
+      },
+    },
+  });
+  postsDesta.map((p) => {
+    p.dataValues.promedio = "datos insuficientes";
+    promedio.map((pro) => {
+      if (p.id == pro.id) {
+        p.dataValues.promedio = pro["Likes.promedio"];
+      }
+    });
+  });
+  postsDesta = postsDesta.filter((p) => p.Likes.length > 1);
+  ///////////////////////////////
 
   res.render("muro", {
     title: "Fotasa App",
