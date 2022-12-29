@@ -19,7 +19,7 @@ block content
       input(type="submit", value="Guardar",class="btn btn-primary") 
       input#cancelarpersonal(type="reset", value="Cancelar",class="btn btn-danger")
      img#previewpersonal(width="200px")
-  br   
+  br        
   div(class="bg-white border rounded-5")
    div(class="w-100 p-4 d-flex justify-content-center pb-4")
     form(action="muro/upload", method="post",enctype="multipart/form-data")
@@ -124,52 +124,52 @@ block content
    .row
     each post in posts    
       .col-md-4
-       div(class="p-3 mb-2 bg-success text-white",style='width: 15rem;border-radius:20px;')
+       div(class="p-3 mb-2 bg-secondary text-white",style='width: 15rem;border-radius:20px;')
         a(href=`muro/detalles/${post.id}`)
          img.card-img-top(src=post.Img.url,style='width: 207px;')
         .card-body
-        h5.card-title=post.titulo
-        p.card-text
-         |Tags:
-        p.card-text= post.etiquetas
-        form(action="/comment", method="post",class="comentarioform")
-         label(for="comentario") Comentar: 
-         input#comentario(type="text", name="comentario")
-         input(type="hidden", name="postid", id=post.id, value=post.id)
-         br
-         input(type="submit", value="Enviar") 
-        div(id=`comentarios${post.id}`)  
-         .comentarios
-           each comentario in post.Comentarios 
-            p=comentario.descripcion
-         br
-         form.rating
-          label
-            input(type='radio' name='stars' value="1"  id=post.id)
-            span.icon &starf;
-          label
-            input(type='radio' name='stars' value="2" id=post.id)
-            span.icon &starf;
-            span.icon &starf;
-          label
-            input(type='radio' name='stars' value="3"  id=post.id)
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
-          label
-            input(type='radio' name='stars' value="4"  id=post.id)
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
-          label
-            input(type='radio' name='stars' value="5"  id=post.id)
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
-          p.card-text=`Promedio: ${post.dataValues.promedio}`
+         h5.card-title=post.titulo
+         p.card-text
+          |Tags:
+         p.card-text= post.etiquetas
+         form(action="/comment", method="post",class="comentarioform")
+          label(for="comentario") Comentar: 
+          input#comentario(type="text", name="comentario")
+          input(type="hidden", name="postid", id=post.id, value=post.id)
+          br
+          input(type="submit", value="Enviar") 
+         div(id=`comentarios${post.id}`)  
+          .comentarios
+            each comentario in post.Comentarios 
+             p=comentario.descripcion
+          br
+          form.rating
+           label
+             input(type='radio' name='stars' value="1"  id=post.id)
+             span.icon &starf;
+           label
+             input(type='radio' name='stars' value="2" id=post.id)
+             span.icon &starf;
+             span.icon &starf;
+           label
+             input(type='radio' name='stars' value="3"  id=post.id)
+             span.icon &starf;
+             span.icon &starf;
+             span.icon &starf;
+           label
+             input(type='radio' name='stars' value="4"  id=post.id)
+             span.icon &starf;
+             span.icon &starf;
+             span.icon &starf;
+             span.icon &starf;
+           label
+             input(type='radio' name='stars' value="5"  id=post.id)
+             span.icon &starf;
+             span.icon &starf;
+             span.icon &starf;
+             span.icon &starf;
+             span.icon &starf;
+           p.card-text=`Promedio: ${post.dataValues.promedio}`
           
     
   

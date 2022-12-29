@@ -2,27 +2,26 @@ extends layout
 block scripts 
  script(src="/javascripts/murojs.js" defer)
 block content
-  a(href="/logout") Logout #{nick}
+  a(href="/logout",class="link-danger") Logout #{nick}
   br
   a(href="/muro") Volver 
-  h1= title
-  form(action="/user/perfil", method="post")
-   input(type="hidden", name="id",value=usuario.id) 
-   label(for="nick") Nick: 
-   input(type="text", name="nick", value=usuario.nick, readonly, disabled)
-   |
-   | 
-   label(for="nombre") Nombre: 
-   input(type="text", name="nombre", value=usuario.nombre)
-   br
-   br
-   label(for="mail") Mail:
-   input(type="text", name="mail", value=usuario.mail, readonly,disabled,size="30")
-   br
-   br
-   label(for="intereses") Intereses: 
-   textarea(name="intereses", cols="30", rows="2")    
-    | #{usuario.intereses}
-   br
-   br
-   input(type="submit", value="Actualizar")
+  h1.subtitulo= title
+  div(class="bg-white border rounded-5")
+   div(class="w-100 p-4 d-flex justify-content-center pb-4")
+    form(action="/user/perfil", method="post")
+     input(type="hidden", name="id",value=usuario.id) 
+     div(class="form-floating mb-3")
+      input(type="text", name="nick", value=usuario.nick, readonly, disabled,class="form-control")
+      label(for="nick") Nick: 
+     div(class="form-floating mb-3")
+      input(type="text", name="nombre", value=usuario.nombre,class="form-control")
+      label(for="nombre") Nombre: 
+     div(class="form-floating mb-3")
+      input(type="text", name="mail", value=usuario.mail, readonly,disabled,size="30",class="form-control")
+      label(for="mail") Mail:
+     div(class="form-floating")
+      textarea(name="intereses", cols="30", rows="2",class="form-control") 
+      label(for="intereses") Intereses:    
+       | #{usuario.intereses}
+     br
+     input(type="submit", value="Actualizar",class="btn btn-primary")
