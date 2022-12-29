@@ -3,99 +3,97 @@ extends layout
 block scripts 
  script(src="/javascripts/murojs.js" defer)
 block content
-  a(href="/logout") Logout #{nick}
+  a(href="/logout",class="link-danger") Logout #{nick}
   br
   a(href="user/perfil") #{nick}: Datos de perfil
   br
   a(href="/") Volver 
-  h1= title
-  form(action="muro/upload/personal", method="post",enctype="multipart/form-data")
-   label(for="imagenpersonal") Guardar imagen o marca personal?
-   |
-   |
-   input#imagenpersonal(type="file", name="imagenpersonal", required)
-   |
-   |
-   input(type="submit", value="Guardar") 
-   |
-   |
-   input#cancelarpersonal(type="reset", value="Cancelar")
-   br
-   img#previewpersonal(width="200px")
-  form(action="muro/upload", method="post",enctype="multipart/form-data")
-   label(for="imagen") Publicar una imagen?
-   |
-   |
-   input#imagen(type="file", name="imagen", required)
-   |
-   |
-   label(for="titulo") Titulo: 
-   input#titulo(type="text", name="titulo")
-   br
-   br
-   label(for="imagenmarca") Colocar marca de agua?
-   |
-   |
-   Select(name="imagenmarca")
-    option(value="") Sin marca...
-    each imagen in imagenes 
-     option(value=imagen.url)=imagen.url  
-   | 
-   | (Imagen personal o marca personal almacenada)  
-   br
-   br
-   label(for="derechos") Derechos de autor?
-   |
-   |
-   Select(name="derechos") 
-    option(value="Dominio Publico") Dominio Publico
-    option(value="Copyright") Copyright
-    option(value="Creative Commons") Creative Commons
-   |
-   |
-   label(for="Categoria") Categoria: 
-   |
-   |
-   Select(name="Categoria")
-    option(value="Personal") Personal 
-    option(value="Arte") Arte 
-    option(value="Dibujo") Dibujo 
-    option(value="Paisaje") Paisaje  
-   |
-   |
-   label(for="tipo") Tipo:
-   |
-   | 
-   Select(name="tipo")
-    option(value="Publico") Publico
-    option(value="Privado") Privado
-   br
-   br
-   label(for="Etiquetas") Etiquetas: #
-   |
-   |
-   input#etiqueta1(type="text", name="Etiquetas") 
-   |
-   |
-   input#etiqueta2(type="text", name="Etiquetas")
-   |
-   |
-   input#etiqueta3(type="text", name="Etiquetas")
-   br
-   br 
-   label(for="Descripcion") Descripcion: 
-   textarea#descripcion(name="Descripcion", cols="40", rows="1")  
-   |
-   |
-   input(type="submit", value="Publicar") 
-   |
-   |
-   input#cancelar(type="reset", value="Cancelar")
-   br
-   img#preview(width="200px")
-   br
-   br
-  h5 Buscador 
+  h1.titulo= title
+  br
+  div(class="bg-white border rounded-5")
+   div(class="w-100 p-4 d-flex justify-content-center pb-4")
+    form(action="muro/upload/personal", method="post",enctype="multipart/form-data")
+     div(class="input-group mb-3")
+      input#imagenpersonal(type="file", name="imagenpersonal",class="form-control", required)
+      label(for="imagenpersonal",class="input-group-text") Guardar imagen o marca personal?
+      input(type="submit", value="Guardar",class="btn btn-primary") 
+      input#cancelarpersonal(type="reset", value="Cancelar",class="btn btn-danger")
+     img#previewpersonal(width="200px")
+  br   
+  div(class="bg-white border rounded-5")
+   div(class="w-100 p-4 d-flex justify-content-center pb-4")
+    form(action="muro/upload", method="post",enctype="multipart/form-data")
+     div(class="input-group mb-3")
+      input#imagen(type="file", name="imagen",class="form-control", required)
+      label(for="imagen",class="input-group-text") Publicar una imagen?
+     div(class="form-floating mb-3")
+      input#titulo(type="text", name="titulo",class="form-control") 
+      label(for="titulo") Titulo: 
+     label(for="imagenmarca") Colocar marca de agua?
+     |
+     |
+     Select(name="imagenmarca")
+      option(value="") Sin marca...
+      each imagen in imagenes 
+       option(value=imagen.url)=imagen.url  
+     | 
+     | (Imagen personal o marca personal almacenada)  
+     br
+     br
+     label(for="derechos") Derechos de autor?
+     |
+     |
+     Select(name="derechos") 
+      option(value="Dominio Publico") Dominio Publico
+      option(value="Copyright") Copyright
+      option(value="Creative Commons") Creative Commons
+     |
+     |
+     label(for="Categoria") Categoria: 
+     |
+     |
+     Select(name="Categoria")
+      option(value="Personal") Personal 
+      option(value="Arte") Arte 
+      option(value="Dibujo") Dibujo 
+      option(value="Paisaje") Paisaje  
+     |
+     |
+     label(for="tipo") Tipo:
+     |
+     | 
+     Select(name="tipo")
+      option(value="Publico") Publico
+      option(value="Privado") Privado
+     br
+     br
+     div(class="row g-3") 
+      div(class="col-md")
+       div(class="form-floating")
+        input#etiqueta1(type="text", name="Etiqueta1",class="form-control") 
+        label(for="Etiqueta1") Etiqueta#1
+      div(class="col-md")
+       div(class="form-floating")  
+        input#etiqueta2(type="text", name="Etiqueta2",class="form-control")
+        label(for="Etiqueta2") Etiqueta#2
+      div(class="col-md")
+       div(class="form-floating")  
+        input#etiqueta3(type="text", name="Etiqueta3",class="form-control")
+        label(for="Etiqueta3") Etiqueta#3
+     br
+     br 
+     div(class="form-floating")
+      textarea#descripcion(name="Descripcion", cols="40", rows="1",class="form-control")
+      label(for="Descripcion") Descripcion:   
+     br
+     input(type="submit", value="Publicar",class="btn btn-primary") 
+     |
+     |
+     input#cancelar(type="reset", value="Cancelar",class="btn btn-danger")
+     br
+     img#preview(width="200px")
+  br
+  h5.buscador Buscador 
   form(action="/buscar", method="post")
    label(for="palabraclave") Palabra clave: 
    |
@@ -103,43 +101,47 @@ block content
    input(type="text", name="palabraclave", required)
    |
    |
-   input(type="submit", value="Buscar")
-  h2 Destacados 
+   input(type="submit", value="Buscar",class="btn btn-primary")
+  br 
+  h2.subtitulo Destacados 
+  br
   .container.mx-auto.mt
    .row
     each postDes in postsDesta    
-      .col-md-4
-       div(class="p-3 mb-2 bg-danger text-white",style='width: 15rem;')
-        img.card-img-top(src=postDes.Img.url,style='width: 207px;')
+      .col-md-3
+       div(class="p-3 mb-2 bg-danger text-white",style='width: 15rem;border-radius:20px;')
+        a(href=`muro/detalles/${postDes.id}`)
+         img.card-img-top(src=postDes.Img.url,style='width: 207px;')
         .card-body
          h5.card-title=postDes.titulo
          p.card-text  
           |Tags:
          p.card-text= postDes.etiquetas
-         a(href=`muro/detalles/${postDes.id}`)  Info...
-  h2 Muro
+  br       
+  h2.subtitulo Muro
+  br
   .container.mx-auto.mt-4
    .row
     each post in posts    
       .col-md-4
-       div(class="p-3 mb-2 bg-success text-white",style='width: 15rem;')
-        img.card-img-top(src=post.Img.url,style='width: 207px;')
+       div(class="p-3 mb-2 bg-success text-white",style='width: 15rem;border-radius:20px;')
+        a(href=`muro/detalles/${post.id}`)
+         img.card-img-top(src=post.Img.url,style='width: 207px;')
         .card-body
-         h5.card-title=post.titulo
-         p.card-text
-          |Tags:
-         p.card-text= post.etiquetas
-         form(action="/comment", method="post",class="comentarioform")
-          label(for="comentario") Comentar: 
-          input#comentario(type="text", name="comentario")
-          input(type="hidden", name="postid", id=post.id, value=post.id)
-          br
-          input(type="submit", value="Enviar") 
-         div(id=`comentarios${post.id}`)  
+        h5.card-title=post.titulo
+        p.card-text
+         |Tags:
+        p.card-text= post.etiquetas
+        form(action="/comment", method="post",class="comentarioform")
+         label(for="comentario") Comentar: 
+         input#comentario(type="text", name="comentario")
+         input(type="hidden", name="postid", id=post.id, value=post.id)
+         br
+         input(type="submit", value="Enviar") 
+        div(id=`comentarios${post.id}`)  
          .comentarios
-          each comentario in post.Comentarios 
-           p=comentario.descripcion
-         a(href=`muro/detalles/${post.id}`)  Info... 
+           each comentario in post.Comentarios 
+            p=comentario.descripcion
          br
          form.rating
           label
@@ -167,7 +169,7 @@ block content
             span.icon &starf;
             span.icon &starf;
             span.icon &starf;
-         p.card-text=`Promedio: ${post.dataValues.promedio}`
+          p.card-text=`Promedio: ${post.dataValues.promedio}`
           
     
   
