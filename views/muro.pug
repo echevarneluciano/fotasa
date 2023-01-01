@@ -3,11 +3,11 @@ extends layout
 block scripts 
  script(src="/javascripts/murojs.js" defer)
 block content
-  a(href="/logout",class="link-danger") Logout #{nick}
-  br
-  a(href="user/perfil") #{nick}: Datos de perfil
-  br
-  a(href="/") Volver 
+  nav(class="navbar navbar-expand-md navbar-dark fixed-top bg-dark") 
+   div(class="container-fluid")
+    a(href="/",class="link-light") Volver 
+    a(href="user/perfil",class="link-light") #{nick}: Datos de perfil
+    a(href="/logout",class="link-light") Logout #{nick}
   h1.titulo= title
   br
   div(class="bg-white border rounded-5")
@@ -95,13 +95,11 @@ block content
   br
   h5.buscador Buscador 
   form(action="/buscar", method="post")
-   label(for="palabraclave") Palabra clave: 
-   |
-   |
-   input(type="text", name="palabraclave", required)
-   |
-   |
-   input(type="submit", value="Buscar",class="btn btn-primary")
+   div(class="form-floating mb-3")
+    input(type="text", name="palabraclave",class="form-control", required)
+    label(for="palabraclave") Palabra clave:
+    br
+    input(type="submit", value="Buscar",class="btn btn-primary")
   br 
   h2.subtitulo Destacados 
   br
@@ -131,44 +129,45 @@ block content
          h5.card-title=post.titulo
          p.card-text
           |Tags:
-         p.card-text= post.etiquetas
+         p(class="text-break")= post.etiquetas
          form(action="/comment", method="post",class="comentarioform")
-          label(for="comentario") Comentar: 
-          input#comentario(type="text", name="comentario")
           input(type="hidden", name="postid", id=post.id, value=post.id)
+          div(class="form-floating mb-3")
+           input#comentario(type="text", name="comentario",class="form-control")
+           label(for="comentario",style="color:black") Comentar: 
           br
-          input(type="submit", value="Enviar") 
+          input(type="submit", value="Enviar",class="btn btn-light") 
          div(id=`comentarios${post.id}`)  
           .comentarios
             each comentario in post.Comentarios 
              p=comentario.descripcion
-          br
-          form.rating
-           label
-             input(type='radio' name='stars' value="1"  id=post.id)
-             span.icon &starf;
-           label
-             input(type='radio' name='stars' value="2" id=post.id)
-             span.icon &starf;
-             span.icon &starf;
-           label
-             input(type='radio' name='stars' value="3"  id=post.id)
-             span.icon &starf;
-             span.icon &starf;
-             span.icon &starf;
-           label
-             input(type='radio' name='stars' value="4"  id=post.id)
-             span.icon &starf;
-             span.icon &starf;
-             span.icon &starf;
-             span.icon &starf;
-           label
-             input(type='radio' name='stars' value="5"  id=post.id)
-             span.icon &starf;
-             span.icon &starf;
-             span.icon &starf;
-             span.icon &starf;
-             span.icon &starf;
+         br
+         form.rating
+          label
+           input(type='radio' name='stars' value="1"  id=post.id)
+           span.icon &starf;
+          label
+           input(type='radio' name='stars' value="2" id=post.id)
+           span.icon &starf;
+           span.icon &starf;
+          label
+           input(type='radio' name='stars' value="3"  id=post.id)
+           span.icon &starf;
+           span.icon &starf;
+           span.icon &starf;
+          label
+           input(type='radio' name='stars' value="4"  id=post.id)
+           span.icon &starf;
+           span.icon &starf;
+           span.icon &starf;
+           span.icon &starf;
+          label
+           input(type='radio' name='stars' value="5"  id=post.id)
+           span.icon &starf;
+           span.icon &starf;
+           span.icon &starf;
+           span.icon &starf;
+           span.icon &starf;
            p.card-text=`Promedio: ${post.dataValues.promedio}`
           
     

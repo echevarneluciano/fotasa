@@ -3,22 +3,24 @@ extends layout
 block scripts 
  script(src="/javascripts/murojs.js" defer)
 block content
-  a(href="/public") Volver 
-  h1= title
-  h2 Buscador
+  nav(class="navbar navbar-expand-md navbar-dark fixed-top bg-dark") 
+   div(class="container-fluid")
+    a(href="/public",class="link-light") Volver 
+  h1.titulo= title
+  h2.subtitulo Buscador
   .container.mx-auto.mt-4
    .row
     each post in posts    
-     .col-md-4
-      .card(style='width: 13rem;background:url("../images/fotaza.png") no-repeat;opacity: 1;')
-       img.card-img-top(src=post.Img.url,style=" opacity: 0.7;width: 207px")
-       .card-body
-        h5.card-title=post.titulo
-        p.card-text
-         |Tags:
-        p.card-text= post.etiquetas
-        br
-        p.card-text=`Promedio: ${post.dataValues.promedio}`
+      .col-md-4
+       div(class="p-3 mb-2 bg-secondary text-white",style='width: 15rem;border-radius:20px;')
+        div(style='width: 13rem;background:url("../images/fotaza.png") no-repeat;opacity: 1;')
+         img.card-img-top(src=post.Img.url,style='width: 207px;opacity: 0.7;width: 207px')
+        .card-body
+         h5.card-title=post.titulo
+         p.card-text
+          |Tags:
+         p(class="text-break")= post.etiquetas
+         p.card-text=`Promedio: ${post.dataValues.promedio}`
           
     
   

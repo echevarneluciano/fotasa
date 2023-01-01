@@ -3,69 +3,64 @@ extends layout
 block scripts 
  script(src="/javascripts/murojs.js" defer)
 block content
-  a(href="/logout") Logout #{nick}
-  br
-  a(href="muro/perfil") #{nick}: Datos de perfil
-  br
-  a(href="/muro") Volver 
-  h1= title
-  h2 Buscador
+  nav(class="navbar navbar-expand-md navbar-dark fixed-top bg-dark") 
+   div(class="container-fluid")
+    a(href="/muro",class="link-light") Volver 
+    a(href="user/perfil",class="link-light") #{nick}: Datos de perfil
+    a(href="/logout",class="link-light") Logout #{nick}
+  h1.titulo= title
+  h2.subtitulo Buscador
   .container.mx-auto.mt-4
    .row
     each post in posts    
       .col-md-4
-       .card(style='width: 18rem;')
-        img.card-img-top(src=post.Img.url)
+       div(class="p-3 mb-2 bg-secondary text-white",style='width: 15rem;border-radius:20px;')
+        a(href=`muro/detalles/${post.id}`)
+         img.card-img-top(src=post.Img.url,style='width: 207px;')
         .card-body
          h5.card-title=post.titulo
-         p.card-text 
-          |Dueño: 
-         p.card-text= `Nick: ${post.User.nick}` 
-         p.card-text= `Mail: ${post.User.mail}` 
-         p.card-text= `Categoria: ${post.categoria}`
          p.card-text
           |Tags:
-         p.card-text= post.etiquetas
-         form(action="muro", method="post",class="comentarioform")
-          label(for="comentario") Comentar: 
-          input#comentario(type="text", name="comentario")
+         p(class="text-break")= post.etiquetas
+         form(action="/comment", method="post",class="comentarioform")
           input(type="hidden", name="postid", id=post.id, value=post.id)
+          div(class="form-floating mb-3")
+           input#comentario(type="text", name="comentario",class="form-control")
+           label(for="comentario",style="color:black") Comentar: 
           br
-          input(type="submit", value="Enviar") 
+          input(type="submit", value="Enviar",class="btn btn-light") 
          div(id=`comentarios${post.id}`)  
-         .comentarios
-          each comentario in post.Comentarios 
-           p=comentario.descripcion
-         a.btn.mr-2(href='/compraventa')
-          i.fas.fa-link
-          |  Compra/venta  
+          .comentarios
+            each comentario in post.Comentarios 
+             p=comentario.descripcion
          br
          form.rating
           label
-            input(type='radio' name='stars' value="1"  id=post.id)
-            span.icon &starf;
+           input(type='radio' name='stars' value="1"  id=post.id)
+           span.icon &starf;
           label
-            input(type='radio' name='stars' value="2" id=post.id)
-            span.icon &starf;
-            span.icon &starf;
+           input(type='radio' name='stars' value="2" id=post.id)
+           span.icon &starf;
+           span.icon &starf;
           label
-            input(type='radio' name='stars' value="3"  id=post.id)
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
+           input(type='radio' name='stars' value="3"  id=post.id)
+           span.icon &starf;
+           span.icon &starf;
+           span.icon &starf;
           label
-            input(type='radio' name='stars' value="4"  id=post.id)
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
+           input(type='radio' name='stars' value="4"  id=post.id)
+           span.icon &starf;
+           span.icon &starf;
+           span.icon &starf;
+           span.icon &starf;
           label
-            input(type='radio' name='stars' value="5"  id=post.id)
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
-            span.icon &starf;
+           input(type='radio' name='stars' value="5"  id=post.id)
+           span.icon &starf;
+           span.icon &starf;
+           span.icon &starf;
+           span.icon &starf;
+           span.icon &starf;
+           p.card-text=`Promedio: ${post.dataValues.promedio}`
           
     
   

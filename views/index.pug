@@ -1,11 +1,10 @@
 extends layout
 
 block content
-  h1= title
-  a(href="/login") Desea logearse/registro 
-  br
-  br
-  a(href="/muro") Ingreso con usuario
-  br
-  br
-  a(href="/public") Ingreso publico 
+  h1.titulo= title
+  div(class="bg-white border rounded-5")
+   div(class="w-100 p-4 d-flex justify-content-center pb-4")
+    .list-group
+     a(href="/login",class="list-group-item list-group-item-action") Desea logearse/registro 
+     a(href="/muro",class="list-group-item list-group-item-action") Ingreso con usuario
+     a(href="/public",class="list-group-item list-group-item-action") Ingreso publico 
