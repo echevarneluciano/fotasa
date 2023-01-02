@@ -1,3 +1,3 @@
 exports.index = function (req, res, next) {
-  res.render("index", { title: "Fotasa App" });
+  res.render("index", { title: "Fotasa App", nick: req.session.nickusuario });
 };

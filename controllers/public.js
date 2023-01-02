@@ -34,6 +34,7 @@ exports.muro = exports.muro = async function (req, res) {
   res.render("publicMuro", {
     title: "Fotasa App",
     posts: posts,
+    nick: req.session.nickusuario,
   });
 };
 

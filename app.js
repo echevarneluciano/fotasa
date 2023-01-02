@@ -21,9 +21,9 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   baseURL: "http://localhost:3000",
-  clientID: "uI9MzRMne1EEiyqm1HPFqDvWvykJnbbz",
-  issuerBaseURL: "https://dev-5xespcu4ztxudvil.us.auth0.com",
-  secret: "LONG_RANDOM_STRING",
+  clientID: "nHESDrgGceAq3p81PIsWuoi33DC17RAY", //"uI9MzRMne1EEiyqm1HPFqDvWvykJnbbz",
+  issuerBaseURL: "https://dev-imbas1v3lp0rrnnp.us.auth0.com", //"https://dev-5xespcu4ztxudvil.us.auth0.com",
+  secret: "a long, randomly-generated string stored in env", //"LONG_RANDOM_STRING",
 };
 
 app.use(auth(config), async function (req, res, next) {
