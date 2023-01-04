@@ -1,0 +1,30 @@
+extends layout
+block scripts 
+ script(src="/javascripts/murojs.js" defer)
+block content
+  nav(class="navbar navbar-expand-md navbar-dark fixed-top bg-dark") 
+   div(class="container-fluid")
+    a(href="/muro",class="link-light") Volver 
+    a(href="/logout",class="link-light") Logout #{nick}
+  h1.subtitulo= title
+  br
+  form(action="/user/transferir", method="post") 
+   label(for="usuarios") Transferir imagen a...
+   |
+   |
+   Select(name="usuarios") 
+      option(value="") Seleccione...
+      each usuario in usuarios 
+       option(value=usuario.id)=usuario.nombre
+   |
+   |    
+   input(type="submit", value="Transferir",class="btn btn-primary")     
+   br
+   br      
+   .row
+    each imagen in imagenes
+     .col-md-3
+      .custom-control.custom-checkbox.image-checkbox
+       input.custom-control-input(type='checkbox',id=imagen.id)
+       label.custom-control-label(for=imagen.id)
+        img.img-fluid(src=imagen.url ,style='width: 207px;')

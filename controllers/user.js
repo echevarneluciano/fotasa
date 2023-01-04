@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Img } = require("../models");
 
 exports.perfil = async function (req, res) {
   let usuario = await User.findByPk(req.session.idusuario);
@@ -7,6 +7,24 @@ exports.perfil = async function (req, res) {
     usuario: usuario,
     nick: req.session.nickusuario,
   });
+};
+
+exports.misimagenes = async function (req, res) {
+  let imagenes = await Img.findAll({
+    where: { userid: req.session.idusuario },
+  });
+  let usuarios = await User.findAll();
+
+  res.render("misimagenes", {
+    title: `Mis imagenes`,
+    imagenes: imagenes,
+    usuarios: usuarios,
+    nick: req.session.nickusuario,
+  });
+};
+
+exports.transferir = async function (req, res) {
+  console.log(req.body);
 };
 
 exports.actualizar = async function (req, res) {
