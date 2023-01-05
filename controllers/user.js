@@ -25,6 +25,7 @@ exports.misimagenes = async function (req, res) {
 
 exports.transferir = async function (req, res) {
   console.log(req.body);
+  //res.json(req.body);
 };
 
 exports.actualizar = async function (req, res) {

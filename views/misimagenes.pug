@@ -1,6 +1,7 @@
 extends layout
+
 block scripts 
- script(src="/javascripts/murojs.js" defer)
+ script(src="/javascripts/misimagenesjs.js" defer)
 block content
   nav(class="navbar navbar-expand-md navbar-dark fixed-top bg-dark") 
    div(class="container-fluid")
@@ -8,17 +9,17 @@ block content
     a(href="/logout",class="link-light") Logout #{nick}
   h1.subtitulo= title
   br
-  form(action="/user/transferir", method="post") 
+  form(action="/user/transferir", method="post",id="formimagenes") 
    label(for="usuarios") Transferir imagen a...
    |
    |
-   Select(name="usuarios") 
+   Select(name="usuarios",id="usuarioselect") 
       option(value="") Seleccione...
       each usuario in usuarios 
        option(value=usuario.id)=usuario.nombre
    |
    |    
-   input(type="submit", value="Transferir",class="btn btn-primary")     
+   input(type="button" , value="Transferir",class="btn btn-primary", id="submitBtn")     
    br
    br      
    .row
