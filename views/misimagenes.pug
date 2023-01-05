@@ -24,7 +24,7 @@ block content
    br      
    .row
     each imagen in imagenes
-     .col-md-3
+     .col-md-3(id=`div${imagen.id}`)
       .custom-control.custom-checkbox.image-checkbox
        input.custom-control-input(type='checkbox',id=imagen.id)
        label.custom-control-label(for=imagen.id)

@@ -24,8 +24,23 @@ exports.misimagenes = async function (req, res) {
 };
 
 exports.transferir = async function (req, res) {
-  console.log(req.body);
-  //res.json(req.body);
+  let imagenes;
+  let usuario = req.body[0].userid;
+  imagenes = req.body.map((i) => {
+    return i.id;
+  });
+  console.log(imagenes);
+  if (usuario) {
+    let result = await Img.update(
+      { userid: usuario },
+      {
+        where: {
+          id: imagenes,
+        },
+      }
+    );
+    res.json(result);
+  }
 };
 
 exports.actualizar = async function (req, res) {
