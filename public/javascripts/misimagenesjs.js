@@ -4,7 +4,7 @@ $("Select").select2({
 
 $("#submitBtn").click(function () {
   let checked = document.querySelectorAll('input[type="checkbox"]:checked');
-  var usuarioselect = $("#usuarioselect option:selected").val();
+  let usuarioselect = $("#usuarioselect option:selected").val();
   let ob = [];
   checked.forEach((f) => ob.push({ id: f.id, userid: usuarioselect }));
   if (ob.length > 0) {
@@ -14,7 +14,13 @@ $("#submitBtn").click(function () {
       contentType: "application/json",
       url: "/user/transferir",
       success: function (data) {
-        console.log(data);
+        if (data > 0) {
+          console.log(data);
+          checked.forEach(
+            (b) =>
+              (document.querySelector(`#div${b.id}`).style.display = "none")
+          );
+        }
       },
     });
   }

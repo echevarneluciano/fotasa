@@ -30,7 +30,7 @@ exports.transferir = async function (req, res) {
     return i.id;
   });
   console.log(imagenes);
-  if (usuario) {
+  if (usuario && usuario != req.session.idusuario) {
     let result = await Img.update(
       { userid: usuario },
       {
