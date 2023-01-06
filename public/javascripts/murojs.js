@@ -72,3 +72,30 @@ $(".comentarioform").submit(function () {
   });
   return false;
 });
+
+$("#etiqueta1").keyup(function () {
+  if ($("#etiqueta1").val().length > 0) {
+    $("#etiqueta2").removeAttr("disabled");
+  } else {
+    $("#etiqueta2").attr("disabled", "disabled");
+    $("#etiqueta3").attr("disabled", "disabled");
+  }
+});
+
+$("#etiqueta2").keyup(function () {
+  if ($("#etiqueta2").val().length > 0) {
+    $("#etiqueta3").removeAttr("disabled");
+  } else {
+    $("#etiqueta3").attr("disabled", "disabled");
+    $("#etiqueta1").removeAttr("disabled");
+  }
+});
+
+$("#etiqueta3").keyup(function () {
+  if ($("#etiqueta3").val().length > 0) {
+    $("#etiqueta2").attr("disabled", "disabled");
+    $("#etiqueta1").attr("disabled", "disabled");
+  } else {
+    $("#etiqueta2").removeAttr("disabled");
+  }
+});

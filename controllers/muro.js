@@ -114,15 +114,11 @@ exports.publicar = async (req, res) => {
   };
   let imgCreada = await Img.create(imgbd);
   let etiqueta = () => {
-    if (
-      req.body.Etiquetas[0] &&
-      req.body.Etiquetas[1] &&
-      req.body.Etiquetas[2]
-    ) {
-      return `#${req.body.Etiquetas[0]}#${req.body.Etiquetas[1]}#${req.body.Etiquetas[2]}`;
-    } else if (req.body.Etiquetas[0] && req.body.Etiquetas[1]) {
-      return `#${req.body.Etiquetas[0]}#${req.body.Etiquetas[1]}`;
-    } else return `#${req.body.Etiquetas[0]}`;
+    if (req.body.Etiqueta1 && req.body.Etiqueta2 && req.body.Etiqueta3) {
+      return `#${req.body.Etiqueta1}#${req.body.Etiqueta2}#${req.body.Etiqueta3}`;
+    } else if (req.body.Etiqueta1 && req.body.Etiqueta2) {
+      return `#${req.body.Etiqueta1}#${req.body.Etiqueta2}`;
+    } else return `#${req.body.Etiqueta1}`;
   };
   let posteobd = {
     imgid: imgCreada.id,
