@@ -15,7 +15,8 @@ block content
     .card-body
      h5.card-title=post.titulo
      p.card-text
-      |Tags:      p.card-text=post.etiquetas
+      |Tags:      
+     p(class="text-break")= post.etiquetas
      p.card-text 
       |Dueño: 
      p.card-text= `Nick: ${post.User.nick}` 

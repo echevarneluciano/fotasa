@@ -95,13 +95,17 @@ exports.publicar = async (req, res) => {
     } else return "Privado";
   };
 
-  if (req.body.imagenmarca != "") {
-    let options = { dstPath: `${req.file.path}` };
-    watermark.addWatermark(
-      req.file.path,
-      `public${req.body.imagenmarca}`,
-      options
-    );
+  try {
+    if (req.body.imagenmarca != "") {
+      let options = { dstPath: `${req.file.path}` };
+      watermark.addWatermark(
+        req.file.path,
+        `public${req.body.imagenmarca}`,
+        options
+      );
+    }
+  } catch (error) {
+    console.log(error);
   }
 
   let ruta = req.file.path.split("public")[1];

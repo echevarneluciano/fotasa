@@ -85,6 +85,7 @@ $("#etiqueta1").keyup(function () {
 $("#etiqueta2").keyup(function () {
   if ($("#etiqueta2").val().length > 0) {
     $("#etiqueta3").removeAttr("disabled");
+    $("#etiqueta1").attr("disabled", "disabled");
   } else {
     $("#etiqueta3").attr("disabled", "disabled");
     $("#etiqueta1").removeAttr("disabled");
