@@ -95,19 +95,6 @@ exports.publicar = async (req, res) => {
     } else return "Privado";
   };
 
-  try {
-    if (req.body.imagenmarca != "") {
-      let options = { dstPath: `${req.file.path}` };
-      watermark.addWatermark(
-        req.file.path,
-        `public${req.body.imagenmarca}`,
-        options
-      );
-    }
-  } catch (error) {
-    console.log(error);
-  }
-
   let ruta = req.file.path.split("public")[1];
   let imgbd = {
     url: ruta,
@@ -147,6 +134,19 @@ exports.publicar = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+  if (req.body.imagenmarca != "") {
+    let options = { dstPath: `${req.file.path}` };
+    try {
+      watermark.addWatermark(
+        req.file.path,
+        `public${req.body.imagenmarca}`,
+        options
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   res.redirect("/muro");
 };
 
